@@ -1,0 +1,54 @@
+.banner{
+  height: 300px;
+  width: 100%;
+  position: relative;
+}
+.banner span{
+  position: absolute;
+  top: 130px;
+  right: 20%;
+  color: white;
+  font-size: 40px;
+}
+.customMarginTitle{
+  margin: 32px 0 12px 0
+}
+.customMarginLine2{
+  margin: 0 0 16px 0
+}
+.customMarginButtons{
+  margin: 0 0 12px 0;
+}
+.mat-column-actions{
+  flex: 0 0 10%;
+}
+.mat-column-actualPrice{
+  flex: 0 0 20%;
+}
+.mat-column-discountPercentage{
+  flex: 0 0 20%;
+}
+.coursesTitle{
+  color: blue;
+  font-size: 16px;
+}
+.mat-column-star{
+  flex: 0 0 6%
+}
+.fullWidth{
+  width: 100%;
+}
+h1{
+  margin-bottom: 0;
+}
+.star{
+  color: yellow;
+  margin-top: 16px;
+}
+.isDisabled {
+  color: currentColor;
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.5;
+  text-decoration: none;
+}

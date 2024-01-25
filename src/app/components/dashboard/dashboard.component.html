@@ -1,0 +1,82 @@
+<div>
+  <div class="banner" [ngStyle]="{background: 'url(assets/vector.PNG)'}">
+    <span>Discover Latest Courses on Angular</span>
+  </div>
+  <div class="container">
+    <br>
+    <br>
+
+    <mat-form-field class="fullWidth" appearance="outline">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search by Course title, author or tags" #input>
+    </mat-form-field>
+
+    <a [routerLink]="" [matMenuTriggerFor]="menu">Sort By Price</a>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="lowToHigh()">
+        Low to High
+      </button>
+      <button mat-menu-item (click)="highToLow()">
+        High to Low
+      </button>
+    </mat-menu>
+
+
+    <mat-table [dataSource]="angularCourses" matSort>
+      <ng-container matColumnDef="star">
+        <mat-header-cell mat-header-cell *matHeaderCellDef> </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let element">
+            <mat-icon class="star" *ngIf="checkElement(element)">star</mat-icon>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="courseName">
+        <mat-header-cell mat-header-cell *matHeaderCellDef class="coursesTitle"> Courses</mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let element">
+          <div class="d-flex flex-column">
+            <h2 class="customMarginTitle">
+              {{element.courseName}}
+            </h2>
+            <div class="customMarginLine1">Author: {{element.author}}</div>
+            <div class="customMarginLine2">{{element.tags}}</div>
+            <div class="customMarginButtons">
+              <a [routerLink]="" (click)="addToWishList(element)" [ngClass]="{ isDisabled: checkElement(element) }">Add to WishList</a>
+              &nbsp;
+              &nbsp;
+              &nbsp;
+              <a [routerLink]="" (click)="addToCart(element)">Add to Cart</a>
+            </div>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actualPrice">
+        <mat-header-cell mat-header-cell *matHeaderCellDef> </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let element">
+          <h1><s>{{element.discountPercentage ? element.actualPrice : ''}}</s></h1>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="discountPercentage">
+        <mat-header-cell mat-header-cell *matHeaderCellDef> </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let element">
+          <h1>{{element.discountPercentage ? getPrice(element.actualPrice, element.discountPercentage) : element.actualPrice}}</h1>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell mat-header-cell *matHeaderCellDef> </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let element">
+          <button mat-button (click)="gotoCourseDetails(element.courseName)">
+            <mat-icon>arrow_forward</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row matRipple *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[4, 8, 12]" showFirstLastButtons aria-label="Select page">
+    </mat-paginator>
+  </div>
+</div>
